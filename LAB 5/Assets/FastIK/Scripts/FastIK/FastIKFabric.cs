@@ -128,9 +128,9 @@ namespace DitzelGames.FastIK
 
             float distanceToTarget = Vector3.Distance(TestAttraction.position, AcTarget.position)-0.3f; 
 
-            float effectFactor =  Mathf.Pow(distanceToTarget / AffectiveDistance, AffectivePower);
+            float effectFactor =  (distanceToTarget / AffectiveDistance);
 
-            effectFactor =1- Mathf.Clamp(effectFactor,0,1);
+            effectFactor = (1 - Mathf.Clamp(effectFactor,0,1)) * AffectivePower;
             Debug.Log(effectFactor);
 
 

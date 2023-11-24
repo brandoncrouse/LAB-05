@@ -5,7 +5,9 @@ using DitzelGames.FastIK;
 
 public class WeightController : MonoBehaviour
 {
-    public float AffectivePower, AffectiveDistance;
+    [Range (0f, 3f)]
+    public float AffectivePower;
+    public float AffectiveDistance;
     public FastIKFabric[] Targets;
     // Start is called before the first frame update
     void Start()
