@@ -18,8 +18,13 @@ namespace DitzelGames.FastIK
         /// <summary>
         /// Target the chain should bent to
         /// </summary>
-        public Transform Target;
+        private Transform Target;
+        public Transform AcTarget;
         public Transform Pole;
+
+        public Transform TestAttraction;
+        public float AffectiveDistance;
+        public float AffectivePower;
 
         /// <summary>
         /// Solver iterations per update
@@ -114,6 +119,25 @@ namespace DitzelGames.FastIK
         void LateUpdate()
         {
             ResolveIK();
+        }
+
+        private void Update()
+        {
+            //TestAttraction
+            //transform
+
+            float distanceToTarget = Vector3.Distance(TestAttraction.position, AcTarget.position)-0.3f; 
+
+            float effectFactor =  Mathf.Pow(distanceToTarget / AffectiveDistance, AffectivePower);
+
+            effectFactor =1- Mathf.Clamp(effectFactor,0,1);
+            Debug.Log(effectFactor);
+
+
+            Target.position = Vector3.Lerp(TestAttraction.position, AcTarget.position, effectFactor);
+
+            //Target.rotation = Quaternion.Lerp(Quaternion.Euler(0, 0, 90), AcTarget.rotation, effectFactor);
+            //Pole.position = Vector3.Lerp(AcTarget.position + Vector3.down * 2, AcTarget.position + Vector3.forward * 2f, effectFactor);
         }
 
         private void ResolveIK()
